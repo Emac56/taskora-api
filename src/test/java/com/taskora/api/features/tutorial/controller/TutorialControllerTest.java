@@ -207,4 +207,69 @@ class TutorialControllerTest {
         )
         .andExpect(status().isBadRequest());
     }
+    @Test
+void shouldReturnBadRequestWhenCreateTitleIsBlank()
+        throws Exception {
+
+    CreateTutorialRequest request = new CreateTutorialRequest();
+    request.setTitle("");
+    request.setDescription("Valid description.");
+    request.setStatus(TutorialStatus.DRAFT);
+
+    mockMvc.perform(
+            post("/api/v1/tutorials")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(request))
+    )
+    .andExpect(status().isBadRequest());
 }
+@Test
+void shouldReturnBadRequestWhenCreateDescriptionIsBlank()
+        throws Exception {
+
+    CreateTutorialRequest request = new CreateTutorialRequest();
+    request.setTitle("Java Basics");
+    request.setDescription("");
+    request.setStatus(TutorialStatus.DRAFT);
+
+    mockMvc.perform(
+            post("/api/v1/tutorials")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(request))
+    )
+    .andExpect(status().isBadRequest());
+}
+@Test
+void shouldReturnBadRequestWhenUpdateTitleIsBlank()
+        throws Exception {
+
+    UpdateTutorialRequest request = new UpdateTutorialRequest();
+    request.setTitle("");
+    request.setDescription("Valid description.");
+    request.setStatus(TutorialStatus.PUBLISHED);
+
+    mockMvc.perform(
+            put("/api/v1/tutorials/1")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(request))
+    )
+    .andExpect(status().isBadRequest());
+}
+
+@Test
+void shouldReturnBadRequestWhenUpdateDescriptionIsBlank()
+        throws Exception {
+
+    UpdateTutorialRequest request = new UpdateTutorialRequest();
+    request.setTitle("Java Basics");
+    request.setDescription("");
+    request.setStatus(TutorialStatus.PUBLISHED);
+
+    mockMvc.perform(
+            put("/api/v1/tutorials/1")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(request))
+    )
+    .andExpect(status().isBadRequest());
+}
+
