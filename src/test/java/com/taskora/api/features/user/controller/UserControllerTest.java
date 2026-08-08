@@ -19,8 +19,10 @@ import com.taskora.api.common.enums.Role;
 import com.taskora.api.features.user.dto.request.LoginRequest;
 import com.taskora.api.features.user.dto.response.LoginResponse;
 import com.taskora.api.features.user.service.UserService;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
 @WebMvcTest(UserController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class UserControllerTest {
 
     @Autowired
