@@ -61,20 +61,14 @@ public class TutorialStepServiceImpl implements TutorialStepService {
 
         return tutorialStepMapper.toResponse(tutorialStep);
     }
+@Override
+public List<TutorialStepResponse> getAllByTutorialId(Long tutorialId) {
 
-    @Override
-    public List<TutorialStepResponse> getAllByTutorialId(
-            Long tutorialId) {
-
-        return tutorialStepRepository.findAll()
-                .stream()
-                .filter(step ->
-                        step.getTutorial() != null
-                                && step.getTutorial().getId()
-                                .equals(tutorialId))
-                .map(tutorialStepMapper::toResponse)
-                .toList();
-    }
+    return tutorialStepRepository.findAllByTutorialId(tutorialId)
+            .stream()
+            .map(tutorialStepMapper::toResponse)
+            .toList();
+}
 
     @Override
     public TutorialStepResponse update(
