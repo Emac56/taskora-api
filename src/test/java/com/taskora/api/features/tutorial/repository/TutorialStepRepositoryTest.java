@@ -20,6 +20,9 @@ class TutorialStepRepositoryTest {
     @Autowired
     private TutorialStepRepository tutorialStepRepository;
 
+    @Autowired
+    private TutorialRepository tutorialRepository;
+
     @Test
     void shouldSaveAndFindTutorialStep() {
         Tutorial tutorial = new Tutorial();
@@ -27,8 +30,10 @@ class TutorialStepRepositoryTest {
         tutorial.setDescription("Learn Java fundamentals.");
         tutorial.setStatus(TutorialStatus.DRAFT);
 
+        Tutorial savedTutorial = tutorialRepository.save(tutorial);
+
         TutorialStep step = new TutorialStep();
-        step.setTutorial(tutorial);
+        step.setTutorial(savedTutorial);
         step.setStepNumber(1);
         step.setInstruction("Open the Java project.");
 
@@ -52,13 +57,15 @@ class TutorialStepRepositoryTest {
         tutorial.setDescription("Learn Java fundamentals.");
         tutorial.setStatus(TutorialStatus.DRAFT);
 
+        Tutorial savedTutorial = tutorialRepository.save(tutorial);
+
         TutorialStep firstStep = new TutorialStep();
-        firstStep.setTutorial(tutorial);
+        firstStep.setTutorial(savedTutorial);
         firstStep.setStepNumber(1);
         firstStep.setInstruction("Open the project.");
 
         TutorialStep secondStep = new TutorialStep();
-        secondStep.setTutorial(tutorial);
+        secondStep.setTutorial(savedTutorial);
         secondStep.setStepNumber(2);
         secondStep.setInstruction("Create a Java class.");
 
@@ -75,8 +82,10 @@ class TutorialStepRepositoryTest {
         tutorial.setDescription("Temporary tutorial.");
         tutorial.setStatus(TutorialStatus.DRAFT);
 
+        Tutorial savedTutorial = tutorialRepository.save(tutorial);
+
         TutorialStep step = new TutorialStep();
-        step.setTutorial(tutorial);
+        step.setTutorial(savedTutorial);
         step.setStepNumber(1);
         step.setInstruction("Temporary step.");
 
