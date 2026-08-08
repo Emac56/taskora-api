@@ -2,7 +2,9 @@ package com.taskora.api.features.tutorial.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.taskora.api.features.tutorial.dto.request.UpdateTutorialStepRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -62,4 +64,22 @@ class TutorialStepMapperTest {
                 response.getImageUrl()
         );
     }
+    @Test
+void shouldUpdateTutorialStepEntity() {
+    UpdateTutorialStepRequest request =
+            new UpdateTutorialStepRequest();
+
+    request.setStepNumber(2);
+    request.setInstruction("Create a Java class.");
+
+    TutorialStep tutorialStep = new TutorialStep();
+
+    tutorialStepMapper.updateEntity(request, tutorialStep);
+
+    assertEquals(2, tutorialStep.getStepNumber());
+    assertEquals(
+            "Create a Java class.",
+            tutorialStep.getInstruction()
+    );
+}
 }
